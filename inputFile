@@ -1,0 +1,119 @@
+###### GHOSTZ-GPU MEGAN PIPELINE INPUT FILE ######
+# Run as: ./execute_GHOST_MEGAN.sh <inputFile>
+
+[PATH]
+    ghostz-gpu = time /gs/hs0/tga-genome/yamasawa/ghostz-gpu/ghostz-gpu
+    blast2rma = /gs/hs0/tga-genome/yamasawa/MEGAN/megan/tools/blast2rma
+    compute-comparison = /gs/hs0/tga-genome/yamasawa/MEGAN/megan/tools/compute-comparison
+    extract-biome = /gs/hs0/tga-genome/yamasawa/MEGAN/megan/tools/extract-biome
+
+[STAGE:DIVIDE_FASTA_FILE]
+    n=2
+    fasta=/gs/hs0/tga-genome/yamasawa/m_thesis/QUERY/20130522H1.fasta_randN1M_a
+
+
+[STAGE:RUN_GHOSTZ-GPU]
+
+### Options Required ###
+    d = /gs/hs0/tga-genome/share/database/NCBI_nr/GZG_DB/180818/nr_180818_GZG
+
+### Options Optional ###
+    v = 1
+    b = 1 
+    l = 134217728
+    q = d
+    t = p
+    F = T
+    a = 1
+    g = 3
+
+
+[STAGE:RUN_BLAST2RMA6]
+
+### SAM, References_as_FastA ###
+    reads = 
+    metaDataFile = 
+
+### Output ###
+    useCompression = true
+
+### Reads ###
+    paired = false
+    pairedSuffixLength = 0
+    pairedReadsInOneFile = false
+
+### Parameters ###
+    longReads = false
+    maxMatchesPerRead = 100
+    classify = true
+    minScore = 50.0
+    maxExpected = 0.01
+    minPercentIdentity = 0.0
+    topPercent = 10.0
+    minSupportPercent = 0.05
+    minPercentReadCover = 0.0
+    minPercentReferenceCover = 0.0
+    lcaAlgorithm = naive
+    lcaCoveragePercent = 100.0
+    readAssignmentMode = readCount
+    conFile = 
+
+### Classification support ###
+
+    parseTaxonNames = true
+    gi2taxa = 
+    acc2taxa = 
+    syn2taxa =
+    gi2eggnog = 
+    acc2eggnog = 
+    syn2eggnog = 
+    tags4eggnog = 
+    gi2interpro2go = 
+    acc2interpro2go = 
+    syn2interpro2go = 
+    tags4interpro2go = 
+    gi2kegg = 
+    acc2kegg = /gs/hs0/tga-genome/yamasawa/m_thesis/acc2kegg-Dec2017X1-ue.abin
+    syn2kegg = 
+    tags4kegg =
+    gi2pfam = 
+    acc2pfam = 
+    syn2pfam = 
+    tags4pfam = 
+    gi2seed = 
+    acc2seed = 
+    syn2seed = 
+    tags4seed =
+
+### Other ###
+
+    firstWordIsAccession = true
+    accessionTags = 
+    verbose = false
+
+[STAGE:RUN_COMPUTE-COMPARISON]
+
+### Options Required ###
+    out = comparison
+
+### Options Optional ###
+    normalize = true
+    ignoreUnassignedReads = false
+    readAssignmentMode = readCount
+    keepOne = false
+    verbose = false
+
+[STAGE:RUN_EXTRACT-BIOME]
+
+### Options Required ###
+    ###outfile extention must be .megan
+    out = totalbiome.megan
+
+### Options Optional ###
+    biome = total
+    samples = ALL
+    sampleThresholdPercent = 50.0
+    classThresholdPercent = 0.1
+    verbose = false
+
+    

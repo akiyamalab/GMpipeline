@@ -1,0 +1,29 @@
+使用法
+
+1. inputFile を編集する
+2. ./start.sh [TSUBAME GROUP] として実行する
+
+**** inputFile内必須事項 ****
+a. 各種ソフトウェアのパス
+b. クエリのパス
+c. クエリ分割数
+d. GHOSTZ-GPU形式のデータベースのパス
+e. 最終結果の出力ファイル名
+*****************************
+その他のオプションは任意。空欄の場合デフォルト値で実行される
+使用するpythonを指定したい場合: start.sh内のpython_path=にpythonのパスを渡す
+
+
+start.shを実行する ->
+start.sh内でmain.shが作成される ->
+start.sh内でmain.shがqsubされる ->
+main.sh内でqueryが分割される ->
+main.sh内でalign_N.shが作成される ->
+main.sh内でalign_N.shがqsubされる ->
+main.sh内でconcat.shが作成される ->
+main.sh内でconcat.shがqsubされる ->
+(main.shのお仕事終了)
+align_N.sh内でGHOSTZ-GPUが実行される ->
+align_N.sh内でMEGANが実行される ->
+すべてのalign_N.shが終了次第concat.shが実行される ->
+最終結果が出力されて計算終了
